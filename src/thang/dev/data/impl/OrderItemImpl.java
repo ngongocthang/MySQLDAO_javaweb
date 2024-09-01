@@ -17,7 +17,7 @@ import thang.dev.data.model.OrderItem;
 public class OrderItemImpl implements OrderItemDao {
 	@Override
 	public boolean insert(OrderItem orderItem) {
-		String sql = "INSERT INTO ORDERITEMS(NAME, THUMBNAIL) VALUES(?, ?)";
+		String sql = "INSERT INTO ORDER_ITEMS(QUANTITY, PRICE, ORDER_ID, PRODUCT_ID) VALUES(?, ?, ?, ?)";
 		try {
 			Connection conn = MySQLDriver.getInstance().getConnection();
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -38,7 +38,7 @@ public class OrderItemImpl implements OrderItemDao {
 
 	@Override
 	public boolean update(OrderItem orderItem) {
-		String sql = "UPDATE ORDERITEMS SET quantity = ?, price = ?, order_id = ?, product_id = ? WHERE id = ?";
+		String sql = "UPDATE ORDER_ITEMS SET quantity = ?, price = ?, order_id = ?, product_id = ? WHERE id = ?";
 		try {
 			Connection conn = MySQLDriver.getInstance().getConnection();
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -46,8 +46,8 @@ public class OrderItemImpl implements OrderItemDao {
 			stmt.setDouble(2, orderItem.price);
 			stmt.setInt(3, orderItem.order_id);
 			stmt.setInt(4, orderItem.product_id);
-//	            stmt.setInt(3, category.id);
-			stmt.setInt(3, 12);
+			stmt.setInt(5, orderItem.id);
+//			stmt.setInt(3, 12);
 
 			stmt.execute();
 		} catch (SQLException e) {
@@ -60,7 +60,7 @@ public class OrderItemImpl implements OrderItemDao {
 
 	@Override
 	public boolean delete(int id) {
-		String sql = "DELETE FROM ORDERITEMS WHERE ID = ?";
+		String sql = "DELETE FROM ORDER_ITEMS WHERE ID = ?";
 		try {
 			Connection conn = MySQLDriver.getInstance().getConnection();
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -78,7 +78,7 @@ public class OrderItemImpl implements OrderItemDao {
 	@Override
 	public OrderItem find(int id) {
 		// TODO Auto-generated method stub
-		String sql = "SELECT * FROM ORDERITEMS WHERE ID = ?";
+		String sql = "SELECT * FROM ORDER_ITEMS WHERE ID = ?";
 		try {
 			Connection conn = MySQLDriver.getInstance().getConnection();
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -103,7 +103,7 @@ public class OrderItemImpl implements OrderItemDao {
 	@Override
 	public List<OrderItem> findAll() {
 		List<OrderItem> orderItemList = new ArrayList<OrderItem>();
-		String sql = "SELECT * FROM ORDERITEMS";
+		String sql = "SELECT * FROM ORDER_ITEMS";
 		try {
 			Connection conn = MySQLDriver.getInstance().getConnection();
 			PreparedStatement stmt = conn.prepareStatement(sql);

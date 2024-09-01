@@ -44,8 +44,8 @@ public class UserImpl implements UserDao {
 			stmt.setString(1, user.email);
 			stmt.setString(2, user.password);
 			stmt.setString(3, user.role);
-//	            stmt.setInt(3, category.id);
-			stmt.setInt(3, 12);
+			stmt.setInt(4, user.id);
+//			stmt.setInt(3, 12);
 
 			stmt.execute();
 		} catch (SQLException e) {

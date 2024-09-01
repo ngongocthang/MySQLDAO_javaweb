@@ -36,15 +36,15 @@ public class OrderImpl implements OrderDao {
 
 	@Override
 	public boolean update(Order order) {
-		String sql = "UPDATE ORDERS SET code = ?, status = ? user_id = ? WHERE id = ?";
+		String sql = "UPDATE ORDERS SET code = ?, status = ?, user_id = ? WHERE id = ?";
 		try {
 			Connection conn = MySQLDriver.getInstance().getConnection();
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, order.code);
 			stmt.setString(2, order.status);
 			stmt.setInt(3, order.user_id);
-//	            stmt.setInt(3, category.id);
-			stmt.setInt(3, 12);
+			stmt.setInt(4, order.id);
+//			stmt.setInt(3, 12);
 
 			stmt.execute();
 		} catch (SQLException e) {
@@ -86,7 +86,7 @@ public class OrderImpl implements OrderDao {
 				String code = rs.getString("code");
 				String status = rs.getString("status");
 				int user_is = rs.getInt("user_id");
-				Timestamp createdAt =rs.getTimestamp("created_at");
+				Timestamp createdAt = rs.getTimestamp("created_at");
 
 				return new Order(id, code, status, user_is, createdAt);
 			}
@@ -110,7 +110,7 @@ public class OrderImpl implements OrderDao {
 				String code = rs.getString("code");
 				String status = rs.getString("status");
 				int user_is = rs.getInt("user_id");
-				Timestamp createdAt =rs.getTimestamp("created_at");
+				Timestamp createdAt = rs.getTimestamp("created_at");
 				orderList.add(new Order(id, code, status, user_is, createdAt));
 			}
 		} catch (SQLException e) {

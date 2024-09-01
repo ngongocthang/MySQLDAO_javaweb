@@ -51,8 +51,8 @@ public class ProductImpl implements ProductDao {
 			stmt.setInt(5, product.quantity);
 			stmt.setInt(6, product.view);
 			stmt.setInt(7, product.category_id);
-//	            stmt.setInt(3, category.id);
-			stmt.setInt(3, 12);
+			stmt.setInt(8, product.id);
+//			stmt.setInt(3, 12);
 
 			stmt.execute();
 		} catch (SQLException e) {
@@ -98,7 +98,7 @@ public class ProductImpl implements ProductDao {
 				int quantity = rs.getInt("quantity");
 				int view = rs.getInt("view");
 				int category_id = rs.getInt("category_id");
-				Timestamp createAt = rs.getTimestamp("createAt");
+				Timestamp createAt = rs.getTimestamp("created_at");
 
 				return new Product(id, name, thumbnail, description, price, quantity, view, category_id, createAt);
 			}
@@ -128,7 +128,8 @@ public class ProductImpl implements ProductDao {
 				int category_id = rs.getInt("category_id");
 				Timestamp createAt = rs.getTimestamp("createAt");
 
-				productList.add(new Product(id, name, thumbnail, description, price, quantity, view, category_id, createAt));
+				productList.add(
+						new Product(id, name, thumbnail, description, price, quantity, view, category_id, createAt));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -40,8 +40,8 @@ public class CategoryImpl implements CategoryDao {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, category.name);
 			stmt.setString(2, category.thumbnail);
-//	            stmt.setInt(3, category.id);
-			stmt.setInt(3, 12);
+			stmt.setInt(3, category.id);
+//			stmt.setInt(3, 12);
 
 			stmt.execute();
 		} catch (SQLException e) {
